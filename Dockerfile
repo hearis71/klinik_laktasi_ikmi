@@ -1,19 +1,28 @@
 # PHP 8.1 with Apache
 FROM php:8.1-apache
 
-# install extensions
+# Install extensions
 RUN docker-php-ext-install pdo pdo_mysql
 
-# copy application source
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Copy application source
 COPY . /var/www/html/
 
-# set permissions (optional but safe)
+# Install dependencies (if composer.json exists)
+RUN if [ -f composer.json ]; then composer install --no-dev --optimize-autoloader --no-interaction; fi
+
+# Set permissions (optional but safe)
 RUN chown -R www-data:www-data /var/www/html
 
-# enable apache rewrite if needed
+# Enable apache rewrite if needed
 RUN a2enmod rewrite
 
-# expose port 80 for HTTP
+# Expose port 80 for HTTP
 EXPOSE 80
 
-# default command is provided by base image (apache2-foreground)
+# Default command is provided by base image (apache2-foreground)
