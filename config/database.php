@@ -4,10 +4,17 @@
  * Klinik Laktasi - MySQL Connection
  */
 
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'klinik_laktasi');
+// read from environment variables if available (Railway sets DATABASE_URL or individual vars)
+$envHost = getenv('DB_HOST');
+$envUser = getenv('DB_USER');
+$envPass = getenv('DB_PASS');
+$envName = getenv('DB_NAME');
+
+// Fallback defaults for local development
+define('DB_HOST', $envHost ? $envHost : 'localhost');
+define('DB_USER', $envUser ? $envUser : 'root');
+define('DB_PASS', $envPass ? $envPass : '');
+define('DB_NAME', $envName ? $envName : 'klinik_laktasi');
 
 /**
  * Create database connection using PDO
