@@ -1,4 +1,4 @@
-name: Deploy PHP to Railway
+name: Deploy PHP to Railway 2
 
 on:
   push:
