@@ -1,9 +1,9 @@
-# ignore files not needed in container
-
 .git
-.gitignore
+.github
 node_modules
 vendor
-\*.log
-.DS_Store
+tests
+*.log
+.env
+Dockerfile
 README.md
