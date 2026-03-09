@@ -102,13 +102,13 @@ ob_start();
                                     >
                                         ✏️
                                     </a>
-                                    <a
+                                    <!-- <a
                                         href="<?php echo baseUrl('pages/asesmen.php?no_registrasi=' . urlencode($reg['no_registrasi'])); ?>"
                                         class="btn btn-sm btn-info"
                                         title="Asesmen"
                                     >
                                         📋
-                                    </a>
+                                    </a> -->
                                     <a
                                         href="<?php echo baseUrl('pages/formulir.php?no_registrasi=' . urlencode($reg['no_registrasi'])); ?>"
                                         class="btn btn-sm btn-secondary"

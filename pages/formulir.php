@@ -60,15 +60,20 @@ ob_start();
                 <h4>IBFAT</h4>
                 <p>Infant Breastfeeding Assessment Tool</p>
             </a>
-            <a href="#" class="formulir-card">
+            <a href="<?php echo baseUrl('pages/formulir/pibbs.php?no_registrasi=' . urlencode($no_registrasi)); ?>" class="formulir-card">
                 <span class="formulir-icon">📈</span>
                 <h4>PIBBS</h4>
                 <p>Preterm Infant Breastfeeding Behaviour Scale</p>
             </a>
-            <a href="#" class="formulir-card">
+            <a href="<?php echo baseUrl('pages/formulir/bsessf.php?no_registrasi=' . urlencode($no_registrasi)); ?>" class="formulir-card">
                 <span class="formulir-icon">💪</span>
                 <h4>BSES-SF</h4>
                 <p>Breastfeeding Self-Efficacy Scale</p>
+            </a>
+            <a href="<?php echo baseUrl('pages/formulir/hatlff.php?no_registrasi=' . urlencode($no_registrasi)); ?>" class="formulir-card">
+                <span class="formulir-icon">👧🏽</span>
+                <h4>HATLFF</h4>
+                <p>Hazelbaker Assesment Tools for Lingual Frenulum Function</p>
             </a>
         </div>
     </div>

@@ -172,6 +172,124 @@ try {
         echo "<p style='color: green;'>✓ Tabel 'ibfat' berhasil dibuat</p>";
     }
 
+    // Create pibbs table if not exists
+    $stmt = $pdo->query("
+        SELECT COUNT(*) as count
+        FROM INFORMATION_SCHEMA.TABLES
+        WHERE TABLE_SCHEMA = DATABASE()
+        AND TABLE_NAME = 'pibbs'
+    ");
+    $result = $stmt->fetch();
+
+    if ($result['count'] > 0) {
+        echo "<p style='color: green;'>✓ Tabel 'pibbs' sudah ada</p>";
+    } else {
+        // Create pibbs table
+        $pdo->exec("
+            CREATE TABLE pibbs (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                no_registrasi VARCHAR(50) NOT NULL,
+                mencari_puting_score TINYINT DEFAULT NULL,
+                cakupan_areola_score TINYINT DEFAULT NULL,
+                menempel_melekat_score TINYINT DEFAULT NULL,
+                menghisap_score TINYINT DEFAULT NULL,
+                menghisap_terpanjang_score TINYINT DEFAULT NULL,
+                menelan_score TINYINT DEFAULT NULL,
+                catatan TEXT DEFAULT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                INDEX idx_no_registrasi (no_registrasi)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        ");
+        echo "<p style='color: green;'>✓ Tabel 'pibbs' berhasil dibuat</p>";
+    }
+
+    // Create bsessf table if not exists
+    $stmt = $pdo->query("
+        SELECT COUNT(*) as count
+        FROM INFORMATION_SCHEMA.TABLES
+        WHERE TABLE_SCHEMA = DATABASE()
+        AND TABLE_NAME = 'bsessf'
+    ");
+    $result = $stmt->fetch();
+
+    if ($result['count'] > 0) {
+        echo "<p style='color: green;'>✓ Tabel 'bsessf' sudah ada</p>";
+    } else {
+        // Create bsessf table
+        $pdo->exec("
+            CREATE TABLE bsessf (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                no_registrasi VARCHAR(50) NOT NULL,
+                pertanyaan_1 TINYINT DEFAULT NULL,
+                pertanyaan_2 TINYINT DEFAULT NULL,
+                pertanyaan_3 TINYINT DEFAULT NULL,
+                pertanyaan_4 TINYINT DEFAULT NULL,
+                pertanyaan_5 TINYINT DEFAULT NULL,
+                pertanyaan_6 TINYINT DEFAULT NULL,
+                pertanyaan_7 TINYINT DEFAULT NULL,
+                pertanyaan_8 TINYINT DEFAULT NULL,
+                pertanyaan_9 TINYINT DEFAULT NULL,
+                pertanyaan_10 TINYINT DEFAULT NULL,
+                pertanyaan_11 TINYINT DEFAULT NULL,
+                pertanyaan_12 TINYINT DEFAULT NULL,
+                total_score TINYINT DEFAULT 0,
+                interpretasi VARCHAR(100) DEFAULT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                INDEX idx_no_registrasi (no_registrasi)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        ");
+        echo "<p style='color: green;'>✓ Tabel 'bsessf' berhasil dibuat</p>";
+    }
+
+    // Create hatlff table if not exists
+    $stmt = $pdo->query("
+        SELECT COUNT(*) as count
+        FROM INFORMATION_SCHEMA.TABLES
+        WHERE TABLE_SCHEMA = DATABASE()
+        AND TABLE_NAME = 'hatlff'
+    ");
+    $result = $stmt->fetch();
+
+    if ($result['count'] > 0) {
+        echo "<p style='color: green;'>✓ Tabel 'hatlff' sudah ada</p>";
+    } else {
+        // Create hatlff table
+        $pdo->exec("
+            CREATE TABLE hatlff (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                no_registrasi VARCHAR(50) NOT NULL,
+                
+                -- Fungsi scores
+                gerak_samping TINYINT DEFAULT NULL,
+                gerak_atas TINYINT DEFAULT NULL,
+                gerak_memanjang TINYINT DEFAULT NULL,
+                pelebaran_ujung TINYINT DEFAULT NULL,
+                bentuk_mangkok TINYINT DEFAULT NULL,
+                gerak_berirama TINYINT DEFAULT NULL,
+                berdecak TINYINT DEFAULT NULL,
+                
+                -- Penampilan scores
+                bentuk_lidah TINYINT DEFAULT NULL,
+                elastisitas TINYINT DEFAULT NULL,
+                panjang_frenulum TINYINT DEFAULT NULL,
+                perlekatan_lidah TINYINT DEFAULT NULL,
+                perlekatan_dasar TINYINT DEFAULT NULL,
+                
+                skor_fungsi TINYINT DEFAULT 0,
+                skor_penampilan TINYINT DEFAULT 0,
+                skor_total TINYINT DEFAULT 0,
+                interpretasi TEXT DEFAULT NULL,
+                
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                INDEX idx_no_registrasi (no_registrasi)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        ");
+        echo "<p style='color: green;'>✓ Tabel 'hatlff' berhasil dibuat</p>";
+    }
+
     echo "<hr>";
     echo "<h3 style='color: green;'>✓ Database sudah siap!</h3>";
     echo "<p><a href='index.php'>Klik disini untuk ke Dashboard</a></p>";

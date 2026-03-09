@@ -72,3 +72,72 @@ CREATE TABLE IF NOT EXISTS `ibfat` (
   `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   INDEX `idx_no_registrasi` (`no_registrasi`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Create pibbs table for Preterm Infant Breastfeeding Behaviour Scale
+CREATE TABLE IF NOT EXISTS `pibbs` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `no_registrasi` VARCHAR(50) NOT NULL,
+  `mencari_puting_score` TINYINT DEFAULT NULL,
+  `cakupan_areola_score` TINYINT DEFAULT NULL,
+  `menempel_melekat_score` TINYINT DEFAULT NULL,
+  `menghisap_score` TINYINT DEFAULT NULL,
+  `menghisap_terpanjang_score` TINYINT DEFAULT NULL,
+  `menelan_score` TINYINT DEFAULT NULL,
+  `catatan` TEXT DEFAULT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX `idx_no_registrasi` (`no_registrasi`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Create bsessf table for Breastfeeding Self-Efficacy Scale - Short Form
+CREATE TABLE IF NOT EXISTS `bsessf` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `no_registrasi` VARCHAR(50) NOT NULL,
+  `pertanyaan_1` TINYINT DEFAULT NULL,
+  `pertanyaan_2` TINYINT DEFAULT NULL,
+  `pertanyaan_3` TINYINT DEFAULT NULL,
+  `pertanyaan_4` TINYINT DEFAULT NULL,
+  `pertanyaan_5` TINYINT DEFAULT NULL,
+  `pertanyaan_6` TINYINT DEFAULT NULL,
+  `pertanyaan_7` TINYINT DEFAULT NULL,
+  `pertanyaan_8` TINYINT DEFAULT NULL,
+  `pertanyaan_9` TINYINT DEFAULT NULL,
+  `pertanyaan_10` TINYINT DEFAULT NULL,
+  `pertanyaan_11` TINYINT DEFAULT NULL,
+  `pertanyaan_12` TINYINT DEFAULT NULL,
+  `total_score` TINYINT DEFAULT 0,
+  `interpretasi` VARCHAR(100) DEFAULT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX `idx_no_registrasi` (`no_registrasi`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Create hatlff table for Hazelbaker Assessment Tool for Lingual Frenulum Function
+CREATE TABLE IF NOT EXISTS `hatlff` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `no_registrasi` VARCHAR(50) NOT NULL,
+  
+  -- Fungsi scores
+  `gerak_samping` TINYINT DEFAULT NULL,
+  `gerak_atas` TINYINT DEFAULT NULL,
+  `gerak_memanjang` TINYINT DEFAULT NULL,
+  `pelebaran_ujung` TINYINT DEFAULT NULL,
+  `bentuk_mangkok` TINYINT DEFAULT NULL,
+  `gerak_berirama` TINYINT DEFAULT NULL,
+  `berdecak` TINYINT DEFAULT NULL,
+  
+  -- Penampilan scores
+  `bentuk_lidah` TINYINT DEFAULT NULL,
+  `elastisitas` TINYINT DEFAULT NULL,
+  `panjang_frenulum` TINYINT DEFAULT NULL,
+  `perlekatan_lidah` TINYINT DEFAULT NULL,
+  `perlekatan_dasar` TINYINT DEFAULT NULL,
+  
+  `skor_fungsi` TINYINT DEFAULT 0,
+  `skor_penampilan` TINYINT DEFAULT 0,
+  `skor_total` TINYINT DEFAULT 0,
+  `interpretasi` TEXT DEFAULT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX `idx_no_registrasi` (`no_registrasi`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
