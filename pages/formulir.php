@@ -45,7 +45,7 @@ ob_start();
                 <h4>Kajian Riwayat Menyusui</h4>
                 <p>Pengkajian riwayat menyusui ibu</p>
             </a>
-            <a href="#" class="formulir-card">
+            <a href="<?php echo baseUrl('pages/formulir/pemeriksaan_fisik.php?no_registrasi=' . urlencode($no_registrasi)); ?>" class="formulir-card">
                 <span class="formulir-icon">👶</span>
                 <h4>Pemeriksaan Fisik Ibu dan Bayi</h4>
                 <p>Pemeriksaan fisik ibu dan bayi</p>
