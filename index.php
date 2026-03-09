@@ -136,7 +136,7 @@ ob_start();
         </div>
         <div class="stat-card teal">
             <div class="stat-content">
-                <h3 class="stat-title">Jumlah Dokter</h3>
+                <h3 class="stat-title">Jumlah Konselor</h3>
                 <p class="stat-value"><?php echo $totalDokter; ?></p>
             </div>
             <span class="stat-icon">👩‍⚕️</span>

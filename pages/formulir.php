@@ -50,12 +50,12 @@ ob_start();
                 <h4>Pemeriksaan Fisik Ibu dan Bayi</h4>
                 <p>Pemeriksaan fisik ibu dan bayi</p>
             </a>
-            <a href="#" class="formulir-card">
+            <a href="<?php echo baseUrl('pages/formulir/latch.php?no_registrasi=' . urlencode($no_registrasi)); ?>" class="formulir-card">
                 <span class="formulir-icon">🤱</span>
                 <h4>LATCH</h4>
                 <p>Penilaian LATCH</p>
             </a>
-            <a href="#" class="formulir-card">
+            <a href="<?php echo baseUrl('pages/formulir/ibfat.php?no_registrasi=' . urlencode($no_registrasi)); ?>" class="formulir-card">
                 <span class="formulir-icon">📊</span>
                 <h4>IBFAT</h4>
                 <p>Infant Breastfeeding Assessment Tool</p>

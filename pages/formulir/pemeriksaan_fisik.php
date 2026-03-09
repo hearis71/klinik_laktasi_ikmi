@@ -31,19 +31,91 @@ if (!$registrasi) {
     redirect('pages/antrian.php', 'Data registrasi tidak ditemukan', 'error');
 }
 
-$f = $_POST;
+// Check if data already exists
+$stmt = $pdo->prepare("SELECT * FROM pemeriksaan_fisik WHERE no_registrasi = ?");
+$stmt->execute([$no_registrasi]);
+$existingData = $stmt->fetch();
 
+// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $success = 'Formulir pemeriksaan fisik berhasil diisi.';
+    $data = [
+        // Ibu
+        'ibu_keadaan_umum' => sanitize($_POST['ibu_keadaan_umum'] ?? ''),
+        'ibu_sistolik_diastolik' => sanitize($_POST['ibu_sistolik_diastolik'] ?? ''),
+        'ibu_nadi_pernapasan' => sanitize($_POST['ibu_nadi_pernapasan'] ?? ''),
+        'ibu_suhu' => sanitize($_POST['ibu_suhu'] ?? ''),
+        'ibu_skrining_nyeri' => sanitize($_POST['ibu_skrining_nyeri'] ?? ''),
+        'ibu_tinggi_badan' => sanitize($_POST['ibu_tinggi_badan'] ?? ''),
+        'ibu_berat_badan' => sanitize($_POST['ibu_berat_badan'] ?? ''),
+        'ibu_index_masa_tubuh' => sanitize($_POST['ibu_index_masa_tubuh'] ?? ''),
+        'ibu_lingkar_kepala' => sanitize($_POST['ibu_lingkar_kepala'] ?? ''),
+        'ibu_pemeriksaan_fisik' => sanitize($_POST['ibu_pemeriksaan_fisik'] ?? ''),
+        'ibu_putting' => sanitize($_POST['ibu_putting'] ?? ''),
+        'ibu_areola' => sanitize($_POST['ibu_areola'] ?? ''),
+        'ibu_corpus_payudara' => sanitize($_POST['ibu_corpus_payudara'] ?? ''),
+        'ibu_payudara_lainnya' => sanitize($_POST['ibu_payudara_lainnya'] ?? ''),
+        
+        // Bayi
+        'bayi_keadaan_umum' => sanitize($_POST['bayi_keadaan_umum'] ?? ''),
+        'bayi_suhu' => sanitize($_POST['bayi_suhu'] ?? ''),
+        'bayi_nadi' => sanitize($_POST['bayi_nadi'] ?? ''),
+        'bayi_pernapasan' => sanitize($_POST['bayi_pernapasan'] ?? ''),
+        'bayi_tonus_otot' => sanitize($_POST['bayi_tonus_otot'] ?? ''),
+        'bayi_kondisi_bibir' => sanitize($_POST['bayi_kondisi_bibir'] ?? ''),
+        'bayi_kondisi_rongga_mulut' => sanitize($_POST['bayi_kondisi_rongga_mulut'] ?? ''),
+        'bayi_kondisi_lidah' => sanitize($_POST['bayi_kondisi_lidah'] ?? ''),
+        'bayi_reflek_rooting' => sanitize($_POST['bayi_reflek_rooting'] ?? ''),
+        'bayi_reflek_sucking' => sanitize($_POST['bayi_reflek_sucking'] ?? ''),
+        'bayi_reflek_suckling' => sanitize($_POST['bayi_reflek_suckling'] ?? ''),
+        'bayi_reflek_swallowing' => sanitize($_POST['bayi_reflek_swallowing'] ?? ''),
+        'bayi_lain_lain' => sanitize($_POST['bayi_lain_lain'] ?? ''),
+    ];
+
+    try {
+        if ($existingData) {
+            // Update
+            $columns = [];
+            $values = [];
+            foreach ($data as $key => $value) {
+                $columns[] = "$key = ?";
+                $values[] = $value;
+            }
+            $values[] = $no_registrasi;
+
+            $sql = "UPDATE pemeriksaan_fisik SET " . implode(', ', $columns) . " WHERE no_registrasi = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute($values);
+
+            redirect('pages/antrian.php', 'Data pemeriksaan fisik berhasil diupdate', 'success');
+        } else {
+            // Insert
+            $data['no_registrasi'] = $no_registrasi;
+            $columns = implode(', ', array_keys($data));
+            $placeholders = implode(', ', array_fill(0, count($data), '?'));
+
+            $stmt = $pdo->prepare("
+                INSERT INTO pemeriksaan_fisik ($columns)
+                VALUES ($placeholders)
+            ");
+            $stmt->execute(array_values($data));
+
+            redirect('pages/antrian.php', 'Data pemeriksaan fisik berhasil disimpan', 'success');
+        }
+    } catch (PDOException $e) {
+        $error = 'Gagal menyimpan data: ' . $e->getMessage();
+    }
 }
+
+// Pre-fill form with existing data
+$f = $existingData ?: [];
 
 ob_start();
 ?>
 
     <?php include __DIR__ . '/formulir_header.php'; ?>
 
-    <?php if (isset($success)): ?>
-        <div class="alert alert-success"><?php echo htmlspecialchars($success); ?></div>
+    <?php if (isset($error)): ?>
+        <div class="alert alert-error"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
 
     <form method="POST" action="" class="form-grid">
@@ -193,11 +265,17 @@ ob_start();
         </div>
 
         <div class="form-actions">
-            <a href="<?php echo baseUrl('pages/antrian.php'); ?>" class="btn btn-secondary-rounded">Batal</a>
-            <button type="submit" class="btn btn-primary-rounded">
-                <span class="btn-icon">S</span>
+            <button type="submit" class="btn btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                    <polyline points="7 3 7 8 15 8"></polyline>
+                </svg>
                 Simpan Data Pemeriksaan Fisik
             </button>
+            <a href="<?php echo baseUrl('pages/antrian.php'); ?>" class="btn btn-secondary">
+                Batal
+            </a>
         </div>
     </form>
 
