@@ -10,11 +10,18 @@ $envBase = getenv('BASE_URL');
 if ($envBase) {
     define('BASE_URL', rtrim($envBase, '/'));
 } else {
-    // Option 1: If using virtual host (http://klinik-laktasi.test)
-    // define('BASE_URL', 'http://klinik-laktasi.test');
-    
-    // Option 2: If using localhost subfolder (http://localhost/klinik-laktasi2)
-    define('BASE_URL', 'http://localhost/klinik-laktasi2');
+    // Detect protocol (http or https)
+    $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? "https" : "http";
+    // Get host name (domain)
+    $host = $_SERVER['HTTP_HOST'];
+
+    // If on localhost, use folder path
+    if ($host === 'localhost') {
+        define('BASE_URL', 'http://localhost/klinik-laktasi2');
+    } else {
+        // If on hosting, use main domain
+        define('BASE_URL', $protocol . "://" . $host);
+    }
 }
 
 // Define base path

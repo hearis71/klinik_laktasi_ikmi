@@ -18,6 +18,9 @@ $user = getCurrentUser();
 ?>
 <header class="header">
     <div class="header-left">
+        <button class="sidebar-toggle" id="sidebarToggle">
+            <span>☰</span>
+        </button>
         <div class="breadcrumb">
             <span class="breadcrumb-item">BERANDA</span>
             <span class="breadcrumb-separator">/</span>

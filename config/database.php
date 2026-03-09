@@ -4,17 +4,23 @@
  * Klinik Laktasi - MySQL Connection
  */
 
-// read from environment variables if available (Railway sets DATABASE_URL or individual vars)
-$envHost = getenv('DB_HOST');
-$envUser = getenv('DB_USER');
-$envPass = getenv('DB_PASS');
-$envName = getenv('DB_NAME');
+// Detect if running on localhost
+$isLocalhost = ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_ADDR'] === '127.0.0.1');
 
-// Fallback defaults for local development
-define('DB_HOST', $envHost ? $envHost : 'localhost');
-define('DB_USER', $envUser ? $envUser : 'root');
-define('DB_PASS', $envPass ? $envPass : '');
-define('DB_NAME', $envName ? $envName : 'klinik_laktasi');
+if ($isLocalhost) {
+    // Local development (Laragon)
+    define('DB_HOST', 'localhost');
+    define('DB_USER', 'root');
+    define('DB_PASS', '');
+    define('DB_NAME', 'klinik_laktasi');
+} else {
+    // Production (InfinityFree / Hosting)
+    // You can also use getenv() here if you set these in your hosting panel
+    define('DB_HOST', getenv('DB_HOST') ?: 'sql210.infinityfree.com');
+    define('DB_USER', getenv('DB_USER') ?: 'if0_41339630');
+    define('DB_PASS', getenv('DB_PASS') ?: 'Laktasi99ok');
+    define('DB_NAME', getenv('DB_NAME') ?: 'if0_41339630_klinik_laktasi');
+}
 
 /**
  * Create database connection using PDO

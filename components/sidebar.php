@@ -76,14 +76,25 @@ $menuItems = [
     ['id' => 'setting', 'icon' => '🔧', 'label' => 'Setting', 'path' => baseUrl('pages/setting.php')],
 ];
 ?>
-<aside class="sidebar">
+<aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
         <h1 class="logo">IKMI care+</h1>
+        <button class="sidebar-close" id="sidebarClose">
+            <span>✕</span>
+        </button>
     </div>
 
     <nav class="sidebar-nav">
-        <?php foreach ($menuItems as $item): ?>
+        <div class="sidebar-heading">Core</div>
+        <?php foreach ($menuItems as $index => $item): ?>
+            <?php 
+                // Add headings for SB Admin 2 style organization
+                if ($item['id'] === 'formulir') echo '<div class="sidebar-heading">Pemeriksaan</div>';
+                if ($item['id'] === 'rekam') echo '<div class="sidebar-heading">Data & Riwayat</div>';
+                if ($item['id'] === 'account') echo '<div class="sidebar-heading">Pengaturan</div>';
+            ?>
             <div class="menu-item-wrapper">
+                <hr class="sidebar-divider">
                 <?php if (isset($item['hasSubmenu']) && $item['hasSubmenu']): ?>
                     <button
                         class="menu-item <?php echo $currentPage === $item['id'] ? 'active' : ''; ?>"
