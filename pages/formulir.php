@@ -37,8 +37,7 @@ ob_start();
 
     <!-- Formulir Content -->
     <div class="form-section">
-        <h3 class="section-title">Pilihan Formulir</h3>
-        <p>Silakan pilih formulir yang ingin diisi:</p>
+        <h3 class="section-title">PengisianFormulir</h3>
         
         <div class="formulir-grid">
             <a href="<?php echo baseUrl('pages/formulir/kajian-riwayat-menyusui.php?no_registrasi=' . urlencode($no_registrasi)); ?>" class="formulir-card">
@@ -48,8 +47,8 @@ ob_start();
             </a>
             <a href="#" class="formulir-card">
                 <span class="formulir-icon">👶</span>
-                <h4>Pemeriksaan Fisik Bayi</h4>
-                <p>Pemeriksaan fisik bayi</p>
+                <h4>Pemeriksaan Fisik Ibu dan Bayi</h4>
+                <p>Pemeriksaan fisik ibu dan bayi</p>
             </a>
             <a href="#" class="formulir-card">
                 <span class="formulir-icon">🤱</span>

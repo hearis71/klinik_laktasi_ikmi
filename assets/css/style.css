@@ -1637,6 +1637,64 @@ tbody tr:hover {
   color: var(--gray-700);
 }
 
+/* Formulir Grid & Cards */
+.formulir-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.formulir-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border: 1px solid var(--gray-200);
+}
+
+.formulir-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(223, 186, 0, 0.1);
+  border-color: var(--primary-color);
+}
+
+.formulir-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  background: var(--gray-100);
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+.formulir-card:hover .formulir-icon {
+  background: rgba(223, 186, 0, 0.1);
+}
+
+.formulir-card h4 {
+  margin-bottom: 8px;
+  color: var(--gray-800);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.formulir-card p {
+  color: var(--gray-600);
+  font-size: 0.9rem;
+}
+
 /* Formulir Tabs */
 .formulir-tabs {
   display: flex;
